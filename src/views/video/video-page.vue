@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+  <div>video</div>
 </template>
 
 <script setup lang="ts"></script>

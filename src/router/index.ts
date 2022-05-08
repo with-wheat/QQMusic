@@ -1,17 +1,45 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/home",
     name: "HomePage",
-    component: () => import(/* webpackChunkName: "Home" */ "@/views/home-page.vue")
+    component: () => import("@/views/home-page.vue"),
+    children: [
+      {
+        path: "/discover",
+        name: "discover",
+        component: () => import("@/views/discover/index.ts"),
+        meta: {
+          menu: "discover",
+          keepAlive: true
+        }
+      },
+      {
+        path: "/music",
+        name: "music",
+        meta: {
+          menu: "music"
+        },
+        component: () => import("@/views/music/index")
+      },
+      {
+        path: "/video",
+        name: "video",
+        component: () => import("@/views/video/index"),
+        meta: {
+          menu: "video",
+          title: "视频",
+          keepAlive: true
+        }
+      }
+    ]
   },
-  { path: "/", redirect: { name: "HomePage" } }
+  { path: "/", redirect: { name: "discover" } }
 ];
 
 const router = createRouter({
-  // history 模式,hash模式:createWebHashHistory()
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 });
 

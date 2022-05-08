@@ -5,9 +5,20 @@ import "@vue/runtime-core";
 
 declare module "@vue/runtime-core" {
   export interface GlobalComponents {
-    HelloWorld: typeof import("./src/components/HelloWorld.vue")["default"];
+    Back: typeof import("./src/components/layout/header/src/back.vue")["default"];
+    ElInput: typeof import("element-plus/es")["ElInput"];
+    ElPageHeader: typeof import("element-plus/es")["ElPageHeader"];
+    ElPopover: typeof import("element-plus/es")["ElPopover"];
+    ElScrollbar: typeof import("element-plus/es")["ElScrollbar"];
+    Header: typeof import("./src/components/layout/header/src/header.vue")["default"];
+    IconPart: typeof import("./src/components/icon/iconPart.vue")["default"];
+    PageMenu: typeof import("./src/components/layout/menu/src/page-menu.vue")["default"];
     RouterLink: typeof import("vue-router")["RouterLink"];
     RouterView: typeof import("vue-router")["RouterView"];
+    Search: typeof import("./src/components/layout/header/src/search.vue")["default"];
+    SearchInfo: typeof import("./src/components/layout/header/src/searchInfo.vue")["default"];
+    SearchMenu: typeof import("./src/components/layout/header/src/search-menu.vue")["default"];
+    SearchPage: typeof import("./src/components/layout/header/src/search-page.vue")["default"];
   }
 }
 
