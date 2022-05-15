@@ -41,6 +41,17 @@ export default defineConfig({
   },
   build: {
     outDir: "docs"
+  },
+  // 配置less全局
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: {
+          hack: `true; @import (reference) "${resolve("src/assets/css/index.less")}";`
+        },
+        javascriptEnabled: true
+      }
+    }
   }
   // 此时会通过上面的代理规则，将源地址代理到目标地址，从而访问目标地址的接口
   // 需要注意的是 /api开头的 /不能丢，正则匹配也是

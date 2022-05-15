@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/discover",
         name: "discover",
-        component: () => import("@/views/discover/index.ts"),
+        component: () => import("@/views/discover/index"),
         meta: {
           menu: "discover",
           keepAlive: true

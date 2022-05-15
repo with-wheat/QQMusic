@@ -5,7 +5,7 @@
         <el-input
           v-model="searchKeyword"
           class="w-50 m-2"
-          size="large"
+          size="default"
           with
           :prefix-icon="Search"
           placeholder="搜索音乐、MV、歌单"
@@ -65,10 +65,12 @@ const searchClick = (info: searchTopTyp) => {
 <style scoped lang="less">
 .page-search {
   padding: 10px;
+  box-sizing: border-box;
 }
 .topSearch {
   font-size: 14px;
   height: 290px;
+  padding: 10px;
   ul {
     width: 100%;
     display: flex;
@@ -82,19 +84,19 @@ const searchClick = (info: searchTopTyp) => {
         margin: 0 5px;
       }
     }
-    li:hover {
-      color: #34d399;
+    li:first-child:hover {
+      color: @color;
     }
     .score {
       text-align: right;
-      color: #fca5a5;
+      color: @fontColor;
     }
   }
 }
 .el-popover {
   height: 200px;
 }
-/deep/.el-input--large {
+.el-input--large {
   width: 200px !important;
 }
 </style>

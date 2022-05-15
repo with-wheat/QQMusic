@@ -6,19 +6,32 @@ import "@vue/runtime-core";
 declare module "@vue/runtime-core" {
   export interface GlobalComponents {
     Back: typeof import("./src/components/layout/header/src/back.vue")["default"];
+    Control: typeof import("./src/components/layout/footer/src/control.vue")["default"];
+    ElAvatar: typeof import("element-plus/es")["ElAvatar"];
+    ElButton: typeof import("element-plus/es")["ElButton"];
+    ElCarousel: typeof import("element-plus/es")["ElCarousel"];
+    ElCarouselItem: typeof import("element-plus/es")["ElCarouselItem"];
+    ElDialog: typeof import("element-plus/es")["ElDialog"];
+    ElImage: typeof import("element-plus/es")["ElImage"];
     ElInput: typeof import("element-plus/es")["ElInput"];
     ElPageHeader: typeof import("element-plus/es")["ElPageHeader"];
     ElPopover: typeof import("element-plus/es")["ElPopover"];
     ElScrollbar: typeof import("element-plus/es")["ElScrollbar"];
+    ElSlider: typeof import("element-plus/es")["ElSlider"];
     Header: typeof import("./src/components/layout/header/src/header.vue")["default"];
     IconPart: typeof import("./src/components/icon/iconPart.vue")["default"];
+    MenuButton: typeof import("./src/components/layout/header/src/menu-button.vue")["default"];
     PageMenu: typeof import("./src/components/layout/menu/src/page-menu.vue")["default"];
+    PlayInfo: typeof import("./src/components/layout/footer/src/playInfo.vue")["default"];
+    PlayList: typeof import("./src/components/layout/footer/src/playList.vue")["default"];
     RouterLink: typeof import("vue-router")["RouterLink"];
     RouterView: typeof import("vue-router")["RouterView"];
     Search: typeof import("./src/components/layout/header/src/search.vue")["default"];
     SearchInfo: typeof import("./src/components/layout/header/src/searchInfo.vue")["default"];
     SearchMenu: typeof import("./src/components/layout/header/src/search-menu.vue")["default"];
     SearchPage: typeof import("./src/components/layout/header/src/search-page.vue")["default"];
+    Src: typeof import("./src/components/layout/footer/src/index.vue")["default"];
+    Volume: typeof import("./src/components/layout/footer/src/volume.vue")["default"];
   }
 }
 

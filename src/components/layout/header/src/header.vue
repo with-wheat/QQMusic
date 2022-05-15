@@ -4,13 +4,18 @@
       <Back />
       <PageSearch />
     </div>
-    <div class="header-right">1111</div>
+    <div class="header-right">
+      <menu-but></menu-but>
+    </div>
   </div>
+  <PageLogin />
 </template>
 
 <script setup lang="ts">
 import PageSearch from "./search.vue";
 import Back from "./back.vue";
+import MenuBut from "./menu-button.vue";
+import PageLogin from "@/views/login/index";
 </script>
 
 <style scoped lang="less">

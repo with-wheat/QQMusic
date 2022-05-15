@@ -24,7 +24,7 @@ import Icon from "../../../../../src/components/icon/index";
     cursor: pointer;
   }
   span:hover {
-    color: #34d399;
+    color: @color;
   }
 }
 </style>
