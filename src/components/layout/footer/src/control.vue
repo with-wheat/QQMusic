@@ -7,7 +7,17 @@
       :size="24"
       @click="playTypeClick"
     ></IconPart>
-    <IconPart class="icon" :icon="GoStart" theme="filled" :size="24"></IconPart>
+    <IconPart
+      class="icon"
+      :icon="GoStart"
+      theme="filled"
+      :size="24"
+      @click="
+        () => {
+          playStore.prev();
+        }
+      "
+    ></IconPart>
     <IconPart
       class="play icon"
       :icon="getPlayState ? PauseOne : Play"
@@ -15,7 +25,17 @@
       :size="45"
       @click="starClick"
     ></IconPart>
-    <IconPart class="icon" :icon="GoEnd" theme="filled" :size="24"></IconPart>
+    <IconPart
+      class="icon"
+      :icon="GoEnd"
+      theme="filled"
+      :size="24"
+      @click="
+        () => {
+          playStore.next();
+        }
+      "
+    ></IconPart>
     <el-popover style="min-width: 50px" placement="top" :width="50">
       <template #reference>
         <IconPart class="icon" :icon="VolumeSmall" size="20" :stroke-width="3" />

@@ -1,12 +1,16 @@
 <template>
   <div class="playInfo">
     <div class="playImg">
-      <el-image style="height: 50px" :src="url" fit="fit" />
+      <el-image
+        style="height: 50px"
+        :src="songInfo?.al?.picUrl ? songInfo?.al?.picUrl : OpticalDisk"
+      />
     </div>
     <div class="palyText">
       <div class="title">
-        <span>开源音乐</span>
-        <span>- SmallRuralDog</span>
+        <span>{{ songInfo?.name ? songInfo?.name : "开源音乐" }}</span>
+        <span v-if="songInfo?.ar">- {{ songInfo?.ar[0]?.name }}</span>
+        <span v-else>- SmallRuralDog</span>
       </div>
       <div class="palyBtn">
         <IconPart :icon="Like" size="18" />
@@ -14,7 +18,7 @@
         <IconPart :icon="MessageOne" size="18" />
         <div class="buzz">
           <IconPart :icon="Comment" size="18" />
-          <span>99+</span>
+          <span>{{ songInfo?.pop > 99 ? "99" : songInfo?.pop }}</span>
         </div>
       </div>
     </div>
@@ -24,7 +28,11 @@
 <script setup lang="ts">
 import { Like, DownloadOne, MessageOne, Comment } from "@icon-park/vue-next";
 import IconPart from "@/components/icon";
-const url = "http://localhost:3002/src/assets/img/OpticalDisk.png";
+import { storeToRefs } from "pinia";
+import { playMusicControl } from "@/store/playMusicControl";
+import { OpticalDisk } from "@/assets/img";
+
+const { songInfo } = storeToRefs(playMusicControl());
 </script>
 
 <style scoped lang="less">
@@ -41,6 +49,7 @@ const url = "http://localhost:3002/src/assets/img/OpticalDisk.png";
     }
   }
   .palyText {
+    width: 120px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -50,9 +59,12 @@ const url = "http://localhost:3002/src/assets/img/OpticalDisk.png";
       span {
         font-size: 12px;
         color: @fontColor1;
+        white-space: nowrap;
       }
       span:last-child {
         color: @fontColor2;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     .palyBtn {

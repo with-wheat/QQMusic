@@ -7,11 +7,11 @@
       <header>
         <PageHeader />
       </header>
-      <div class="content">
-        <ElScrollbar>
+      <el-scrollbar>
+        <div class="content">
           <router-view></router-view>
-        </ElScrollbar>
-      </div>
+        </div>
+      </el-scrollbar>
       <footer>
         <Footer />
       </footer>
@@ -23,15 +23,16 @@
 import pageMenu from "@/components/layout/menu/index";
 import PageHeader from "@/components/layout/header/index";
 import Footer from "@/components/layout/footer";
+import { userPlayerInit } from "@/store/playMusicControl";
+
+userPlayerInit();
 </script>
 
 <style scoped lang="less">
 .home {
   display: flex;
   height: 100%;
-  overflow: hidden;
   .menu {
-    overflow: auto;
     height: 100%;
     width: 200px;
     min-width: 200px;
@@ -41,8 +42,9 @@ import Footer from "@/components/layout/footer";
     display: flex;
     flex-direction: column;
     flex: 1;
+    margin-bottom: 60px;
     .content {
-      padding: 20px;
+      padding: 0 20px;
       box-sizing: border-box;
     }
   }

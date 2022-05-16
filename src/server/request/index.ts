@@ -7,7 +7,7 @@ import { LoadingInstance } from "element-plus/lib/components/loading/src/loading
 
 const DEAFULT_LOADING = true;
 
-class HYRequest {
+class Request {
   instance: AxiosInstance;
   interceptors?: HYRequestInterceptors;
   showLoading: boolean;
@@ -125,4 +125,4 @@ class HYRequest {
   }
 }
 
-export default HYRequest;
+export default Request;
