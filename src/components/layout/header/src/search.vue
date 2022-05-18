@@ -12,12 +12,14 @@
           clearable
           @focus="showSearchView == true"
           @focusout="showSearchView == false"
+          @input="searchChange"
+          @clear="setSearchView()"
         />
         />
       </template>
       <template #default>
         <el-scrollbar>
-          <div v-if="showHot" class="topSearch">
+          <div v-if="showSearchView" class="topSearch">
             <span>热门搜索</span>
             <ul
               v-for="(item, index) in searchTopInfo"
@@ -50,8 +52,8 @@ import { useSearchStore } from "@/store/search";
 import SearchInfo from "./searchInfo.vue";
 
 const searchTopInfo = ref<searchTopTyp[]>([]);
-const { showSearchView, searchKeyword, showHot } = storeToRefs(useSearchStore());
-const { getSearchInfo } = useSearchStore();
+const { showSearchView, searchKeyword } = storeToRefs(useSearchStore());
+const { getSearchInfo, setSearchView } = useSearchStore();
 onMounted(async () => {
   searchTopInfo.value = await searchTop();
 });
@@ -59,6 +61,14 @@ onMounted(async () => {
 const searchClick = (info: searchTopTyp) => {
   searchKeyword.value = info.searchWord;
   getSearchInfo();
+  setSearchView();
+};
+const searchChange = (info: string) => {
+  if (info !== "") {
+    searchKeyword.value = info;
+    getSearchInfo();
+  }
+  setSearchView();
 };
 </script>
 

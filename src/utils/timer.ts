@@ -6,7 +6,7 @@
 export function secondsFormat(sec: number) {
   let hour: string | number = Math.floor(sec / 3600);
   let minute: string | number = Math.floor((sec - hour * 3600) / 60);
-  let second: string | number = sec - hour * 3600 - minute * 60;
+  let second: string | number = Number.parseInt((sec - hour * 3600 - minute * 60).toFixed(0));
   if (hour < 10) {
     hour = "0" + hour;
   }

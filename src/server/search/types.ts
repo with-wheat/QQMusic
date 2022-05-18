@@ -9,13 +9,6 @@ export interface searchTopTyp {
   alg: string;
 }
 
-export interface SearchSuggest {
-  albums: SearchSuggestAlbums[];
-  artists: SearchSuggestArtists[];
-  songs: SearchSuggestSongs[];
-  playlists: SearchSuggestPlaylists[];
-  order: string[];
-}
 export interface SearchSuggestAlbumsArtist {
   id: number;
   name: string;
@@ -117,4 +110,11 @@ export interface SearchSuggestPlaylists {
   actionType?: any;
   description?: any;
   highQuality: boolean;
+}
+export interface SearchSuggest {
+  albums: SearchSuggestAlbums[];
+  artists: SearchSuggestArtists[];
+  songs: SearchSuggestSongs[];
+  playlists: SearchSuggestPlaylists[];
+  order: string[];
 }

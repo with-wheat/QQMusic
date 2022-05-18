@@ -1,7 +1,7 @@
 <template>
-  <h2>热门推荐 ></h2>
+  <h2>推荐MV ></h2>
   <div class="playList">
-    <div v-for="item in PersonaInfo" :key="item.id" class="item" @click="playChange(item.id)">
+    <div v-for="item in newMvInfo" :key="item.id" class="item" @click="mvClick(item)">
       <div class="img">
         <div class="count">
           <el-image :src="item.picUrl" fit="cover" />
@@ -14,24 +14,33 @@
           <IconPart :icon="PlayOne" size="50" />
         </div>
       </div>
-      <div class="text">{{ item.name }}</div>
+      <div class="text">
+        <span>{{ item.name }}</span>
+        <br />
+        <span>{{ item.artistName }}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { Personalized } from "@/server/discover/index";
-import { playListTypes } from "@/server/discover/type.d";
+import { getNewMv } from "@/server/discover/index";
+import { newMvTypes } from "@/server/discover/type.d";
 import IconPart from "@/components/icon";
 import { PlayOne, Headset } from "@icon-park/vue-next";
-import Route from "@/router";
-const PersonaInfo = ref<playListTypes[]>();
+import router from "@/router";
+const newMvInfo = ref<newMvTypes[]>();
 onMounted(async () => {
-  PersonaInfo.value = await Personalized(10);
+  newMvInfo.value = await getNewMv();
 });
-const playChange = (id: number) => {
-  Route.push({ path: "/playList", query: { playListId: id } });
+const mvClick = (data: newMvTypes) => {
+  router.push({
+    path: "/video",
+    query: {
+      videoId: data.id
+    }
+  });
 };
 </script>
 
@@ -41,11 +50,10 @@ h2 {
 }
 .playList {
   display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
   .item {
     cursor: pointer;
-
     .img {
       position: relative;
       display: flex;
@@ -55,7 +63,6 @@ h2 {
         justify-content: center;
         align-items: center;
         position: relative;
-
         .el-image {
           width: 100%;
           border-radius: 5px;
@@ -106,10 +113,6 @@ h2 {
         opacity: 1;
       }
     }
-    .img:hover {
-      transition: all 0.2s;
-      transform: translateY(-5px) scale(1.01);
-    }
     .text {
       font-size: 13px;
       color: @fontColor1;
@@ -117,19 +120,23 @@ h2 {
       overflow: hidden;
       text-overflow: ellipsis;
       margin-top: 5px;
+      span:last-child {
+        font-size: 12px;
+        color: @fontColor2;
+      }
     }
   }
 }
 </style>
 <style scoped>
-@media only screen and (max-width: 1400px) {
-  .playList {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-}
-@media only screen and (max-width: 970px) {
+@media only screen and (max-width: 1500px) {
   .playList {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .playList {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
 </style>

@@ -7,15 +7,17 @@
       <div class="count">
         <ExclusivePlaylist />
         <RecommendSong />
+        <NewMvInfo />
       </div>
     </el-scrollbar>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="discover">
 import Banner from "./banner.vue";
 import ExclusivePlaylist from "./exclusivePlaylist.vue";
 import RecommendSong from "./recomSong.vue";
+import NewMvInfo from "./play-mv.vue";
 </script>
 
 <style scoped lang="less">

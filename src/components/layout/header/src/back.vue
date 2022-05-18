@@ -1,13 +1,31 @@
 <template>
   <div class="back">
-    <Icon :icon="ArrowLeft" size="18" />
-    <Icon :icon="ArrowRight" size="18" />
+    <Icon
+      :icon="ArrowLeft"
+      size="18"
+      @click="
+        () => {
+          router.go(-1);
+        }
+      "
+    />
+    <Icon
+      :icon="ArrowRight"
+      size="18"
+      @click="
+        () => {
+          router.go(1);
+        }
+      "
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ArrowLeft, ArrowRight } from "@icon-park/vue-next";
-import Icon from "../../../../../src/components/icon/index";
+import Icon from "@/components/icon/index";
+import { useRouter } from "vue-router";
+const router = useRouter();
 </script>
 
 <style scoped lang="less">

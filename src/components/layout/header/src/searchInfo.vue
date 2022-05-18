@@ -4,7 +4,7 @@
       <span>{{ getTitle(temp) }}</span>
       <template v-if="temp == 'songs'">
         <div>
-          <ul v-for="item in searchInfo.songs" :key="item.id">
+          <ul v-for="item in searchInfo.songs" :key="item.id" @click="songClick(item.id)">
             <li>
               <span style="color: #34d399">{{ item.name }} - </span>
               <span>{{ item.artists[0].name }}</span>
@@ -47,10 +47,12 @@
 </template>
 
 <script setup lang="ts">
-import {} from "vue";
 import { storeToRefs } from "pinia";
 import { useSearchStore } from "@/store/search";
+import { playMusicControl } from "@/store/playMusicControl";
 const { searchInfo } = storeToRefs(useSearchStore());
+
+const songStore = playMusicControl();
 const getTitle = (name: string) => {
   switch (name) {
     case "songs":
@@ -64,6 +66,9 @@ const getTitle = (name: string) => {
     default:
       return name;
   }
+};
+const songClick = (id: number) => {
+  songStore.setSongInfo(id);
 };
 </script>
 

@@ -9,7 +9,13 @@
       </header>
       <el-scrollbar>
         <div class="content">
-          <router-view></router-view>
+          <router-view v-slot="{ Component }">
+            <transition name="slide-fade">
+              <keep-alive include="discover,music">
+                <component :is="Component" />
+              </keep-alive>
+            </transition>
+          </router-view>
         </div>
       </el-scrollbar>
       <footer>
@@ -42,11 +48,25 @@ userPlayerInit();
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
     .content {
       padding: 0 20px;
       box-sizing: border-box;
     }
   }
+}
+
+.slide-fade-enter-active {
+  transition: all 0.4s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(32px);
+  opacity: 0.5;
 }
 </style>

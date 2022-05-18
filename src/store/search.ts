@@ -10,14 +10,17 @@ export const useSearchStore = defineStore("search", {
       searchInfo: {} as SearchSuggest
     };
   },
-  getters: {
-    showHot: (state) => {
-      return state.searchKeyword == "";
-    }
-  },
+  getters: {},
   actions: {
     async getSearchInfo() {
       this.searchInfo = await searchInfo(this.searchKeyword);
+    },
+    setSearchView() {
+      if (this.searchKeyword === "") {
+        this.showSearchView = true;
+      } else {
+        this.showSearchView = false;
+      }
     }
   }
 });

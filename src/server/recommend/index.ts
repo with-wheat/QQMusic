@@ -22,7 +22,7 @@ export async function banner(type: number) {
 export async function songDetail(ids: number) {
   const { songs } = await Request.get<{ songs: songInfo[] }>({
     url: "/song/detail",
-    params: { ids: ids }
+    params: { ids: ids, t: new Date() }
   });
   return songs[0];
 }

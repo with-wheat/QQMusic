@@ -14,7 +14,7 @@
       :size="24"
       @click="
         () => {
-          playStore.prev();
+          playStore.playEnd();
         }
       "
     ></IconPart>
@@ -32,7 +32,7 @@
       :size="24"
       @click="
         () => {
-          playStore.next();
+          playStore.playEnd();
         }
       "
     ></IconPart>

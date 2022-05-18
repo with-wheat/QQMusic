@@ -8,6 +8,7 @@ declare module "@vue/runtime-core" {
     Back: typeof import("./src/components/layout/header/src/back.vue")["default"];
     Control: typeof import("./src/components/layout/footer/src/control.vue")["default"];
     ElAvatar: typeof import("element-plus/es")["ElAvatar"];
+    ElButton: typeof import("element-plus/es")["ElButton"];
     ElCarousel: typeof import("element-plus/es")["ElCarousel"];
     ElCarouselItem: typeof import("element-plus/es")["ElCarouselItem"];
     ElDialog: typeof import("element-plus/es")["ElDialog"];
@@ -18,6 +19,8 @@ declare module "@vue/runtime-core" {
     ElPopover: typeof import("element-plus/es")["ElPopover"];
     ElScrollbar: typeof import("element-plus/es")["ElScrollbar"];
     ElSlider: typeof import("element-plus/es")["ElSlider"];
+    ElTabPane: typeof import("element-plus/es")["ElTabPane"];
+    ElTabs: typeof import("element-plus/es")["ElTabs"];
     Header: typeof import("./src/components/layout/header/src/header.vue")["default"];
     IconPart: typeof import("./src/components/icon/iconPart.vue")["default"];
     MenuButton: typeof import("./src/components/layout/header/src/menu-button.vue")["default"];
@@ -29,6 +32,7 @@ declare module "@vue/runtime-core" {
     Search: typeof import("./src/components/layout/header/src/search.vue")["default"];
     SearchInfo: typeof import("./src/components/layout/header/src/searchInfo.vue")["default"];
     SliderInput: typeof import("./src/components/layout/footer/src/sliderInput.vue")["default"];
+    SongListItem: typeof import("./src/components/common/SongListItem.vue")["default"];
     Src: typeof import("./src/components/layout/footer/src/index.vue")["default"];
     Volume: typeof import("./src/components/layout/footer/src/volume.vue")["default"];
   }

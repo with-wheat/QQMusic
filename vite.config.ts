@@ -3,7 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
-
+import VueSetupExtend from "vite-plugin-vue-setup-extend";
 // 如果这里飘红则安装下依赖。
 // pnpm add @types/node -D
 // npm install @types/node -D
@@ -19,7 +19,8 @@ export default defineConfig({
     }),
     Components({
       resolvers: [ElementPlusResolver()]
-    })
+    }),
+    VueSetupExtend()
   ],
   resolve: {
     // 配置别名

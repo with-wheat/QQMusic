@@ -46,6 +46,7 @@ const { songInfo } = storeToRefs(playMusicControl());
     .el-image {
       border-radius: 5px;
       margin: 0 10px 0 0;
+      cursor: pointer;
     }
   }
   .palyText {

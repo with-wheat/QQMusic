@@ -12,7 +12,7 @@ export const playMusicControl = defineStore("playMusicControl", {
       // new一个播放对象
       audio: new Audio(),
       // 播放列表
-      playList: [] as songUrl[],
+      playList: [] as songInfo[],
       // 默认不播放
       playState: false as boolean,
       // 播放歌曲类型
@@ -104,13 +104,12 @@ export const playMusicControl = defineStore("playMusicControl", {
      * 播放音乐
      * @param id 音乐id
      */
-    async setSongInfo(id: number) {
-      if (id == this.id) return;
+    async setSongInfo(id: number, loop = false) {
+      if (id == this.id && !loop) return;
       this.playState = true;
       this.getSongDetail(id);
       const SongUrl = await getSongUrl(id);
       if (SongUrl.url) {
-        this.playList.push(SongUrl);
         this.audio.src = SongUrl?.url;
         this.audio.play().then(() => {
           // 获取歌曲详情
@@ -128,6 +127,7 @@ export const playMusicControl = defineStore("playMusicControl", {
     },
     //播放结束
     playEnd() {
+      if (this.playList.length === 0) return false;
       switch (this.playTypes) {
         case 0:
           // 顺序播放
@@ -145,19 +145,21 @@ export const playMusicControl = defineStore("playMusicControl", {
     },
     // 下一曲
     next() {
-      if (this.playList[this.songIndex + 1]) {
-        this.setSongInfo(this.playList[this.songIndex + 1].id);
+      // 判断是否为最后一首
+      if (this.playList.length - 1 !== this.songIndex) {
+        this.setSongInfo(this.playList[++this.songIndex].id);
       } else {
+        // 没有下一曲
         this.songIndex = 0;
-        this.setSongInfo(this.playList[this.songIndex].id);
+        this.setSongInfo(this.playList[this.songIndex].id, true);
       }
     },
     prev() {
-      if (this.playList[this.songIndex - 1]) {
-        this.setSongInfo(this.playList[this.songIndex - 1].id);
+      if (this.songIndex - 1 !== -1) {
+        this.setSongInfo(this.playList[--this.songIndex].id);
       } else {
         this.songIndex = this.playList.length - 1;
-        this.setSongInfo(this.playList[this.songIndex].id);
+        this.setSongInfo(this.playList[this.songIndex].id, true);
       }
     },
     /**
@@ -170,7 +172,7 @@ export const playMusicControl = defineStore("playMusicControl", {
      * 单曲循环
      */
     onePlay() {
-      this.audio.play();
+      this.setSongInfo(this.id, true);
     },
     /**
      * 获取歌曲详情
@@ -179,20 +181,34 @@ export const playMusicControl = defineStore("playMusicControl", {
     async getSongDetail(id: number) {
       const data = await songDetail(id);
       this.songInfo = data;
+      let isValue = true;
+      // 查看列表是否含有歌曲
+      this.playList.map((res) => {
+        if (res.id === id) isValue = false;
+      });
+      if (isValue) {
+        this.playList.unshift(data);
+      }
     },
     /**
      * 加入歌单列表
      * @param music 歌曲信息
      */
-    setPlayMusic(music: songUrl) {
+    setPlayMusic(music: songInfo) {
       this.playList = [...this.playList, music];
+    },
+    /**
+     * 批量加入歌曲信息
+     * @param music 歌曲信息
+     */
+    setAllPlayMusic(music: songInfo[]) {
+      this.playList = [...this.playList, ...music];
     }
   }
 });
 export const userPlayerInit = () => {
   let timer: NodeJS.Timer;
   const { interval, playEnd } = playMusicControl();
-
   const { ended } = storeToRefs(playMusicControl());
 
   //监听播放结束

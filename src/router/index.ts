@@ -30,7 +30,17 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           menu: "video",
           title: "视频",
-          keepAlive: true
+          keepAlive: false
+        }
+      },
+      {
+        path: "/playList",
+        name: "playList",
+        component: () => import("@/views/playList/index"),
+        meta: {
+          menu: "playList",
+          title: "歌单列表",
+          keepAlive: false
         }
       }
     ]
