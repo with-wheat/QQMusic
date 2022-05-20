@@ -32,7 +32,7 @@ import SliderInput from "./sliderInput.vue";
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  z-index: 9999;
+  z-index: 999;
 }
 .content {
   width: calc(100% - 200px);

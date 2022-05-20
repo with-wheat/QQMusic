@@ -69,4 +69,14 @@ userPlayerInit();
   transform: translateX(32px);
   opacity: 0.5;
 }
+
+/deep/.el-tabs__item.is-active {
+  color: @color !important;
+}
+/deep/.el-tabs__item:hover {
+  color: @color !important;
+}
+/deep/.el-tabs__active-bar {
+  background-color: @color !important;
+}
 </style>

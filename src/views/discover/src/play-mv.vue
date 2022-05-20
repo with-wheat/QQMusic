@@ -36,7 +36,7 @@ onMounted(async () => {
 });
 const mvClick = (data: newMvTypes) => {
   router.push({
-    path: "/video",
+    path: "/playVideo",
     query: {
       videoId: data.id
     }

@@ -34,12 +34,32 @@ const routes: Array<RouteRecordRaw> = [
         }
       },
       {
+        path: "/dj",
+        name: "dj",
+        component: () => import("@/views/dj"),
+        meta: {
+          menu: "dj",
+          title: "电台",
+          keepAlive: true
+        }
+      },
+      {
         path: "/playList",
         name: "playList",
         component: () => import("@/views/playList/index"),
         meta: {
           menu: "playList",
           title: "歌单列表",
+          keepAlive: false
+        }
+      },
+      {
+        path: "/playVideo",
+        name: "playVideo",
+        component: () => import("@/components/common/playVideo.vue"),
+        meta: {
+          menu: "playVideo",
+          title: "播放视频",
           keepAlive: false
         }
       }

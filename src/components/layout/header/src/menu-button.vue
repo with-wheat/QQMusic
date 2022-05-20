@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, watch } from "vue";
 import { Mail, Platte, HamburgerButton } from "@icon-park/vue-next";
 import IconPart from "@/components/icon/index";
 import { loginStore } from "@/store/login";
@@ -30,9 +30,10 @@ import { storeToRefs } from "pinia";
 import locaoCache from "@/utils/cache";
 const loginOk = ref<boolean>(false);
 
-const { account, profile } = storeToRefs(loginStore());
+const { profile, account } = storeToRefs(loginStore());
 
 const { setGetCenterDialogVisible, setUserInfo } = loginStore();
+
 const userState = async () => {
   if (locaoCache.getToken()) {
     await setUserInfo(locaoCache.getToken() as string);
@@ -41,6 +42,14 @@ const userState = async () => {
     loginOk.value = false;
   }
 };
+
+watch(account, () => {
+  if (account) {
+    loginOk.value = true;
+  } else {
+    loginOk.value = false;
+  }
+});
 userState();
 const codeLogin = () => {
   setGetCenterDialogVisible(true);

@@ -1,5 +1,5 @@
 <template>
-  <div class="songItem">
+  <div class="songItem" :class="song.id == playStore.id ? 'active' : ''">
     <div class="song">
       <div class="songName">
         <IconPark class="love" :icon="Like" size="16" />
@@ -83,13 +83,11 @@ const playVideo = () => {
   .song {
     flex: 6;
     display: flex;
-    justify-content: space-between;
     .songName {
-      flex: 2;
+      width: 120px;
       .truncate {
-        width: 120px;
+        flex: 0;
         small {
-          width: 100%;
           margin: 0 5px;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -144,5 +142,8 @@ const playVideo = () => {
   .btn {
     visibility: visible;
   }
+}
+.active {
+  background-color: rgb(236 253 245 0.5);
 }
 </style>

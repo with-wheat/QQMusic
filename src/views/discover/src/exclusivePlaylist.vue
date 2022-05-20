@@ -25,13 +25,13 @@ import { Personalized } from "@/server/discover/index";
 import { playListTypes } from "@/server/discover/type.d";
 import IconPart from "@/components/icon";
 import { PlayOne, Headset } from "@icon-park/vue-next";
-import Route from "@/router";
+import Router from "@/router";
 const PersonaInfo = ref<playListTypes[]>();
 onMounted(async () => {
   PersonaInfo.value = await Personalized(10);
 });
 const playChange = (id: number) => {
-  Route.push({ path: "/playList", query: { playListId: id } });
+  Router.push({ path: "/playList", query: { playListId: id } });
 };
 </script>
 

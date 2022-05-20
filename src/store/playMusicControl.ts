@@ -93,12 +93,16 @@ export const playMusicControl = defineStore("playMusicControl", {
       }
     },
     /* 设置播放音量 */
-    setVolume() {
-      console.log(11);
+    setVolume(n: number) {
+      n = n > 100 ? 100 : n;
+      n = n < 0 ? 0 : n;
+      this.volume = n;
+      this.audio.volume = n / 100;
     },
     /* 设置是否静音 */
     setMute() {
       this.mute = !this.mute;
+      this.audio.muted = this.mute;
     },
     /**
      * 播放音乐
@@ -202,7 +206,9 @@ export const playMusicControl = defineStore("playMusicControl", {
      * @param music 歌曲信息
      */
     setAllPlayMusic(music: songInfo[]) {
-      this.playList = [...this.playList, ...music];
+      this.playList = [...music, ...this.playList];
+      this.songIndex = 0;
+      this.setSongInfo(this.playList[this.songIndex].id, true);
     }
   }
 });

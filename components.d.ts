@@ -23,10 +23,12 @@ declare module "@vue/runtime-core" {
     ElTabs: typeof import("element-plus/es")["ElTabs"];
     Header: typeof import("./src/components/layout/header/src/header.vue")["default"];
     IconPart: typeof import("./src/components/icon/iconPart.vue")["default"];
+    InfiniteScroll: typeof import("element-plus/es")["ElInfiniteScroll"];
     MenuButton: typeof import("./src/components/layout/header/src/menu-button.vue")["default"];
     PageMenu: typeof import("./src/components/layout/menu/src/page-menu.vue")["default"];
     PlayInfo: typeof import("./src/components/layout/footer/src/playInfo.vue")["default"];
     PlayList: typeof import("./src/components/layout/footer/src/playList.vue")["default"];
+    PlayVideo: typeof import("./src/components/common/playVideo.vue")["default"];
     RouterLink: typeof import("vue-router")["RouterLink"];
     RouterView: typeof import("vue-router")["RouterView"];
     Search: typeof import("./src/components/layout/header/src/search.vue")["default"];

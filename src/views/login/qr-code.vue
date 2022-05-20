@@ -11,6 +11,8 @@ import type { loginCode, CodeImgType } from "@/server/login/types";
 import { ElMessage } from "element-plus";
 import { loginStore } from "@/store/login";
 import locaoCache from "@/utils/cache";
+
+const loginStores = loginStore();
 // 获取登录二维码的key
 const codeKey = ref<loginCode | undefined>();
 const codeImg = ref<CodeImgType | undefined>();
@@ -31,18 +33,20 @@ const check = () => {
   timer = setInterval(async () => {
     const data = await getCheckInfo(codeKey.value?.unikey as string);
     if (data.code == 803) {
-      ElMessage({
-        message: "登录成功",
-        type: "success"
-      });
+      // 关闭登录弹窗
+      loginStores.setGetCenterDialogVisible(false);
       clearInterval(timer);
       // 保存cookie
       locaoCache.setToken(data.cookie);
       // 获取登录状态
       userStatus(data.cookie);
+      ElMessage({
+        message: "登录成功",
+        type: "success"
+      });
     } else if (data.code == 800) {
       ElMessage({
-        message: "二维码已失效，请刷新！",
+        message: "二维码已失效，请刷新后重试！",
         type: "warning"
       });
       clearInterval(timer);
@@ -51,12 +55,10 @@ const check = () => {
         message: "扫描成功！",
         type: "success"
       });
-      clearInterval(timer);
     }
   }, 3000);
 };
 
-const loginStores = loginStore();
 const userStatus = (cookie: string) => {
   loginStores.setUserInfo(cookie);
 };

@@ -47,25 +47,28 @@
         <span>清空</span>
       </div>
     </div>
-    <div
-      v-for="item in playList"
-      :key="item.id"
-      class="content"
-      :class="item.id === id ? 'active' : ''"
-    >
-      <div class="songInfo">
-        <div class="img">
-          <el-image :src="item.al.picUrl" />
-        </div>
-        <div class="songTitle">
-          <div class="name">{{ item.al.name }}</div>
-          <div class="author">
-            <span v-for="ar in item.ar" :key="ar.id">{{ ar.name }}</span>
+    <el-scrollbar>
+      <div
+        v-for="item in playList"
+        :key="item.id"
+        class="content"
+        :class="item.id === id ? 'active' : ''"
+        @click="playListChange(item.id)"
+      >
+        <div class="songInfo">
+          <div class="img">
+            <el-image :src="item.al.picUrl" lazy />
+          </div>
+          <div class="songTitle">
+            <div class="name">{{ item.name }}</div>
+            <div class="author">
+              <span v-for="ar in item.ar" :key="ar.id">{{ ar.name }}</span>
+            </div>
           </div>
         </div>
+        <div class="songTime">{{ secondsFormat(item.dt / 1000) }}</div>
       </div>
-      <div class="songTime">{{ secondsFormat(item.dt / 1000) }}</div>
-    </div>
+    </el-scrollbar>
   </el-drawer>
 </template>
 
@@ -78,6 +81,9 @@ import { secondsFormat } from "@/utils/timer";
 import { ref } from "vue";
 const { currentTime, duration, playList, id } = storeToRefs(playMusicControl());
 const drawer = ref(false);
+const playListChange = (id: number) => {
+  playMusicControl().setSongInfo(id);
+};
 </script>
 
 <style scoped lang="less">
@@ -189,6 +195,10 @@ const drawer = ref(false);
   .content:hover {
     cursor: pointer;
     background-color: rgba(218, 217, 217, 0.2);
+  }
+
+  .el-scrollbar {
+    height: calc(89vh);
   }
 }
 </style>

@@ -14,7 +14,7 @@
       :size="24"
       @click="
         () => {
-          playStore.playEnd();
+          playStore.prev();
         }
       "
     ></IconPart>
@@ -36,11 +36,16 @@
         }
       "
     ></IconPart>
-    <el-popover style="min-width: 50px" placement="top" :width="50">
+    <el-popover style="min-width: 50px; z-index: 9999" placement="top" :width="50">
       <template #reference>
         <IconPart class="icon" :icon="VolumeSmall" size="20" :stroke-width="3" />
       </template>
-      <Volume />
+      <Volume
+        :volume-value="volume"
+        :mute="mute"
+        @update-mute="updateMute"
+        @update-volume-value="updateVolumeValue"
+      />
     </el-popover>
   </div>
 </template>
@@ -60,7 +65,7 @@ import {
   Play,
   VolumeSmall
 } from "@icon-park/vue-next";
-const { getPlayState, getPlayTypes } = storeToRefs(playMusicControl());
+const { getPlayState, getPlayTypes, volume, mute } = storeToRefs(playMusicControl());
 const playStore = playMusicControl();
 // 播放类型点击事件
 const playTypeClick = () => {
@@ -69,6 +74,14 @@ const playTypeClick = () => {
 // 播放暂停点击事件
 const starClick = () => {
   playStore.setPlayState();
+};
+// 设置静音
+const updateMute = () => {
+  playStore.setMute();
+};
+// 设置音量
+const updateVolumeValue = (num: number) => {
+  playStore.setVolume(num);
 };
 </script>
 
@@ -89,8 +102,9 @@ const starClick = () => {
   .play {
     color: @color;
   }
-  .el-popover {
+  /deep/.el-popover {
     max-width: 30px !important;
+    z-index: 999999;
     .volume {
       display: flex;
       flex-direction: column;
@@ -103,9 +117,5 @@ const starClick = () => {
       }
     }
   }
-}
-
-/deep/.el-popover.el-popper {
-  max-width: 40px !important;
 }
 </style>

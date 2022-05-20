@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { getPlayList, getPlaySongList } from "@/server/discover";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import SongList from "./SongList.vue";
 import { useRoute } from "vue-router";
 import { playMusicControl } from "@/store/playMusicControl";
@@ -51,11 +51,13 @@ const privileges = ref<songInfo[]>([]);
 const activeName = ref("first");
 
 const playStore = playMusicControl();
-
-getPlayList(playListId).then((res) => {
-  playlist.value = res.playlist;
-  getPlaySongList(res.playlist.id).then((t) => (privileges.value = t));
+onMounted(() => {
+  getPlayList(playListId).then((res) => {
+    playlist.value = res.playlist;
+    getPlaySongList(res.playlist.id).then((t) => (privileges.value = t));
+  });
 });
+
 /**
  * 播放全部
  */
@@ -130,14 +132,5 @@ const AllSong = () => {
       }
     }
   }
-}
-/deep/.el-tabs__item.is-active {
-  color: @color !important;
-}
-/deep/.el-tabs__item:hover {
-  color: @color !important;
-}
-/deep/.el-tabs__active-bar {
-  background-color: @color !important;
 }
 </style>
