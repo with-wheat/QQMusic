@@ -40,8 +40,11 @@ import { Add, DownTwo, Like, MoreTwo, PlayOne, PlayTwo } from "@icon-park/vue-ne
 import IconPark from "@/components/icon";
 import type { songInfo } from "@/server/recommend/type";
 import { secondsFormat } from "@/utils/timer";
+
 import { playMusicControl } from "@/store/playMusicControl";
+
 import { useRouter } from "vue-router";
+
 const props = defineProps<{
   song: songInfo;
 }>();
@@ -55,8 +58,12 @@ const playStore = playMusicControl();
 const playSong = () => {
   playStore.setSongInfo(props.song.id);
 };
+/**
+ * 播放视频
+ */
 const playVideo = () => {
-  router.push({ path: "/video", query: { videoId: props.song.mv } });
+  // 跳转页面
+  router.push({ path: "/playVideo", query: { videoId: props.song.mv } });
 };
 </script>
 

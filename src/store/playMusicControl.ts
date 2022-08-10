@@ -18,9 +18,9 @@ export const playMusicControl = defineStore("playMusicControl", {
       // 播放歌曲类型
       playTypes: 0 as number, // 0顺序，1随机，2单曲
       // 音量
-      volume: 60,
+      volume: 60 as number,
       // 是否静音
-      mute: false,
+      mute: false as boolean,
       // 当前播放的音乐信息
       songUrl: {} as songUrl,
       // // 当前播放的音乐详情信息

@@ -10,14 +10,25 @@ export const mainStore = defineStore("main", {
    * @returns  一个函数，调用得到容器实例
    */
   state: () => {
-    return {};
+    return {
+      // 底部控制栏显示隐藏
+      ControlVisible: true as boolean
+    };
   },
   /**
    * 类似于组件的computed，用来封装计算属性，有缓存的功能
    */
-  getters: {},
+  getters: {
+    getControlVisible(state) {
+      return state.ControlVisible;
+    }
+  },
   /**
    * 类似于组件的methods，封装业务逻辑（同步，异步都可以），修改state
    */
-  actions: {}
+  actions: {
+    setControlVisible(temp: boolean) {
+      this.ControlVisible = temp;
+    }
+  }
 });

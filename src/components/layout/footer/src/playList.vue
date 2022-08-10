@@ -21,6 +21,7 @@
     </div>
   </div>
   <el-drawer
+    v-if="drawer"
     v-model="drawer"
     size="280px"
     :with-header="false"

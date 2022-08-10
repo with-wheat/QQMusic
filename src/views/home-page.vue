@@ -18,8 +18,11 @@
           </router-view>
         </div>
       </el-scrollbar>
+
       <footer>
-        <Footer />
+        <transition name="el-zoom-in-bottom">
+          <Footer v-if="getControlVisible" />
+        </transition>
       </footer>
     </div>
   </div>
@@ -29,7 +32,12 @@
 import pageMenu from "@/components/layout/menu/index";
 import PageHeader from "@/components/layout/header/index";
 import Footer from "@/components/layout/footer";
+
+import { storeToRefs } from "pinia";
 import { userPlayerInit } from "@/store/playMusicControl";
+import { mainStore } from "@/store";
+
+const { getControlVisible } = storeToRefs(mainStore());
 
 userPlayerInit();
 </script>
