@@ -17,10 +17,12 @@ import { mainStore } from "@/store";
 const musicControl = playMusicControl();
 const MainStore = mainStore();
 const Route = useRoute();
+
 let videoId: number = Route.query && Number.parseInt(Route.query.videoId + "");
 let mvInfo = ref<mvInfoTypes>();
 
 onMounted(() => {
+  musicControl.playState = true;
   // 暂停播放歌曲
   musicControl.setPlayState();
   // 隐藏底部控制台

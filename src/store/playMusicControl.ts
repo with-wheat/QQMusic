@@ -170,7 +170,7 @@ export const playMusicControl = defineStore("playMusicControl", {
      * 随机播放
      */
     randomPlay() {
-      this.setSongInfo(_.sample(this.playList).id);
+      this.setSongInfo(_.sample(this.playList)?.id || 0, false);
     },
     /**
      * 单曲循环
